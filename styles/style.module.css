@@ -1,0 +1,129 @@
+.main {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.modal {
+  display: flex;
+  width: 868px;
+  padding: var(--0, 0px) var(--5, 20px) var(--5, 20px) var(--5, 20px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--0, 0px);
+  border-radius: var(--rounded-lg, 8px);
+  background: var(--white, #fff);
+  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.05),
+    0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.modal_header {
+  display: flex;
+  padding: var(--4, 16px) var(--0, 0px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--0, 0px);
+  align-self: stretch;
+  border-bottom: 1px solid var(--gray-200, #e5e7eb);
+}
+.closebtn {
+  display: flex;
+  padding: var(--0, 0px);
+  align-items: center;
+  gap: var(--0, 0px);
+  flex: 1 0 0;
+  align-self: stretch;
+  color: rgba(17, 25, 40, 1);
+}
+
+.heading {
+  color: var(--gray-900, #111928);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  color: rgba(17, 25, 40, 1);
+}
+.close {
+  width: Fill (364px);
+  height: Fill (27px);
+}
+.cross {
+  width: 12px;
+  height: 12px;
+  padding: 0.6px, 0.6px, 0.6px, 0.6px;
+}
+.vector {
+  width: 20.8px;
+  height: 20.8px;
+  top: 0.6px;
+  left: 0.6px;
+  color: #6b7280;
+}
+.modal_body {
+  display: flex;
+  padding-top: var(--4, 16px);
+  flex-direction: column;
+  align-items: center;
+  gap: var(--4, 16px);
+  align-self: stretch;
+}
+
+.row1 {
+  display: flex;
+  padding: var(--0, 0px);
+  align-items: flex-start;
+  gap: var(--4, 16px);
+  align-self: stretch;
+}
+.input_field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--2, 8px);
+  flex: 1 0 0;
+}
+.prd_name {
+  align-self: stretch;
+  color: var(--gray-900, #111928);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.input_txt {
+  display: flex;
+  align-items: center;
+  gap: var(--25, 10px);
+  align-self: stretch;
+  border-radius: var(--rounded-lg, 8px);
+  color: var(--gray-50, #f9fafb);
+  flex: 1 0 0;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%;
+}
+.select {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--2, 8px);
+  flex: 1 0 0;
+}
+.select_name {
+  display: flex;
+  padding: var(--0, 0px);
+  align-items: center;
+  gap: var(--2, 8px);
+  align-self: stretch;
+  color: var(--gray-900, #111928);
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
