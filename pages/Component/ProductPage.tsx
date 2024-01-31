@@ -56,16 +56,22 @@ export function ProductPage() {
 
   const ValidationSchema: ZodType<Validation> = z.object({
     Product_Name: z.string().min(1, { message: "Product name required" }),
-    Brand: z.string().min(1, "Brand name required"),
-    Price: z.number().min(1, "pride is required"),
-    Item_Weight: z.number().min(1, "weight is required"),
-    Lenght: z.number().min(1, "length is required"),
-    Breadth: z.number().min(1, "breadth is required"),
-    Width: z.number().min(1, "width is required"),
-    Description: z.string().min(10, "description is required min 10 character"),
+    Brand: z.string().min(1, { message: "Brand name required" }),
+    Price: z.number().min(1, { message: "Price required" }),
+    Item_Weight: z.number().min(1, { message: "weight required" }),
+    Lenght: z.number().min(1, { message: "Length required" }),
+    Breadth: z.number().min(1, { message: "Breadth required" }),
+    Width: z.number().min(1, { message: "Width required" }),
+    Description: z
+      .string()
+      .min(10, { message: "Description is required min 10" }),
   });
 
-  const { register, handleSubmit } = useForm<Validation>({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<Validation>({
     resolver: zodResolver(ValidationSchema),
   });
 
@@ -94,14 +100,20 @@ export function ProductPage() {
         <div className={style.product_info}>
           <div className={style.product}>
             <div>
-              <Label value="Product Name" />
+              <Label htmlFor="base" value="Product Name" />
             </div>
             <TextInput
               type="text"
+              id="base"
               placeholder="Apple iMac 27”"
               className={style.textInput}
               {...register("Product_Name")}
             />
+            {errors.Product_Name && (
+              <span className="flex text-red-600">
+                {errors.Product_Name.message}
+              </span>
+            )}
           </div>
           <div className={style.select}>
             <div className={style.info}>
@@ -124,10 +136,14 @@ export function ProductPage() {
             </div>
             <TextInput
               type="text"
+              id="base"
               placeholder="Apple"
               className={style.textInput}
               {...register("Brand")}
             />
+            {errors.Brand && (
+              <span className="flex text-red-600">{errors.Brand.message}</span>
+            )}
           </div>
           <div className={style.product}>
             <div>
@@ -135,10 +151,14 @@ export function ProductPage() {
             </div>
             <TextInput
               type="text"
+              id="base"
               placeholder="$2999"
               className={style.textInput}
               {...register("Price")}
             />
+            {errors.Price && (
+              <span className="flex text-red-600">{errors.Price.message}</span>
+            )}
           </div>
         </div>
 
@@ -149,10 +169,16 @@ export function ProductPage() {
             </div>
             <TextInput
               type="text"
+              id="base"
               placeholder="12"
               className={style.textInput}
               {...register("Item_Weight")}
             />
+            {errors.Item_Weight && (
+              <span className="flex text-red-600">
+                {errors.Item_Weight.message}
+              </span>
+            )}
           </div>
           <div className={style.product}>
             <div>
@@ -160,10 +186,14 @@ export function ProductPage() {
             </div>
             <TextInput
               type="text"
+              id="base"
               placeholder="105"
               className={style.textInput}
               {...register("Lenght")}
             />
+            {errors.Lenght && (
+              <span className="flex text-red-600">{errors.Lenght.message}</span>
+            )}
           </div>
           <div className={style.product}>
             <div>
@@ -171,10 +201,16 @@ export function ProductPage() {
             </div>
             <TextInput
               type="text"
+              id="base"
               placeholder="15"
               className={style.textInput}
               {...register("Breadth")}
             />
+            {errors.Breadth && (
+              <span className="flex text-red-600">
+                {errors.Breadth.message}
+              </span>
+            )}
           </div>
           <div className={style.product}>
             <div>
@@ -182,10 +218,14 @@ export function ProductPage() {
             </div>
             <TextInput
               type="text"
+              id="base"
               placeholder="23"
               className={style.textInput}
               {...register("Width")}
             />
+            {errors.Width && (
+              <span className="flex text-red-600">{errors.Width.message}</span>
+            )}
           </div>
         </div>
 
@@ -194,18 +234,23 @@ export function ProductPage() {
           <Textarea
             id="comment"
             rows={6}
-            placeholder="Standard glass,
-            3.8GHz 8-core 10th-generation Intel Core i7 processor,
-            Turbo Boost up to 5.0GHz,
-            16GB 2666MHz DDR4 memory,
-            Radeon Pro 5500 XT with 8GB of GDDR6 memory,
-            256GB SSD storage,
-            Gigabit Ethernet,
-            Magic Mouse 2,
-            Magic Keyboard-Us"
+            // placeholder="Standard glass,
+            // 3.8GHz 8-core 10th-generation Intel Core i7 processor,
+            // Turbo Boost up to 5.0GHz,
+            // 16GB 2666MHz DDR4 memory,
+            // Radeon Pro 5500 XT with 8GB of GDDR6 memory,
+            // 256GB SSD storage,
+            // Gigabit Ethernet,
+            // Magic Mouse 2,
+            // Magic Keyboard-Us"
             className={style.textArea}
             {...register("Description")}
           />
+          {errors.Description && (
+            <span className="flex text-red-600">
+              {errors.Description.message}
+            </span>
+          )}
         </div>
 
         <div className={style.selling_info}>
