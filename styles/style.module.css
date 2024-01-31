@@ -312,3 +312,30 @@
   background: var(--red-700, #c81e1e);
   color: rgba(255, 255, 255, 1);
 }
+
+.arr_index_img {
+  display: flex;
+  width: 144px;
+  height: 144px;
+  padding: var(--0, 0px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--0, 0px);
+
+  border-radius: var(--rounded-lg, 8px);
+  background: var(--gray-100, #f3f4f6);
+}
+.index_1_arr {
+  width: 122px;
+  height: 125px;
+  flex-shrink: 0;
+}
+.img_trash {
+  width: var(--5, 20px);
+  height: var(--5, 20px);
+  position: relative;
+  left: -53px;
+  bottom: 6.5px;
+  cursor: pointer;
+}

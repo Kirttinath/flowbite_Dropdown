@@ -3,6 +3,7 @@ import { FcInfo } from "react-icons/fc";
 import { IoClose } from "react-icons/io5";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import React from "react";
+import Image from "next/image";
 import style from "@/styles/style.module.css";
 import {
   Label,
@@ -13,8 +14,71 @@ import {
   FileInput,
   Button,
 } from "flowbite-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ZodType, z } from "zod";
+
+type Validation = {
+  Product_Name: string;
+  Brand: string;
+  Price: number;
+  Item_Weight: number;
+  Lenght: number;
+  Breadth: number;
+  Width: number;
+  Description: string;
+};
 
 export function ProductPage() {
+  const [fileList, setFileList] = useState([]);
+  const fileOnDrop = (e: any) => {
+    e.preventDefault();
+    const newfile = e.target.files[0];
+    if (newfile) {
+      const UpadateList: any = [...fileList, newfile];
+      setFileList(UpadateList);
+      console.log(UpadateList);
+    }
+  };
+  const dropOnfile = (e: any) => {
+    e.preventDefault();
+    const newfile = e.dataTransfer.files[0];
+    if (newfile) {
+      const UpadateList: any = [...fileList, newfile];
+      setFileList(UpadateList);
+      console.log(UpadateList);
+    }
+  };
+  const dragFiles = (e: any) => {
+    e.preventDefault();
+  };
+
+  const ValidationSchema: ZodType<Validation> = z.object({
+    Product_Name: z.string().min(1, { message: "Product name required" }),
+    Brand: z.string().min(1, "Brand name required"),
+    Price: z.number().min(1, "pride is required"),
+    Item_Weight: z.number().min(1, "weight is required"),
+    Lenght: z.number().min(1, "length is required"),
+    Breadth: z.number().min(1, "breadth is required"),
+    Width: z.number().min(1, "width is required"),
+    Description: z.string().min(10, "description is required min 10 character"),
+  });
+
+  const { register, handleSubmit } = useForm<Validation>({
+    resolver: zodResolver(ValidationSchema),
+  });
+
+  const submitData = (data: Validation) => {
+    console.log("Working", data);
+  };
+  const remove = (index: number) => {
+    const upadtelist = fileList.filter((item, id: number) => {
+      return index !== id;
+    });
+    setFileList(upadtelist);
+  };
+
   return (
     <div className={style.modal}>
       <div className={style.modal_header}>
@@ -25,7 +89,8 @@ export function ProductPage() {
           <IoClose className={style.close} />
         </div>
       </div>
-      <div className={style.modal_body}>
+
+      <form className={style.modal_body} onSubmit={handleSubmit(submitData)}>
         <div className={style.product_info}>
           <div className={style.product}>
             <div>
@@ -35,6 +100,7 @@ export function ProductPage() {
               type="text"
               placeholder="Apple iMac 27”"
               className={style.textInput}
+              {...register("Product_Name")}
             />
           </div>
           <div className={style.select}>
@@ -60,6 +126,7 @@ export function ProductPage() {
               type="text"
               placeholder="Apple"
               className={style.textInput}
+              {...register("Brand")}
             />
           </div>
           <div className={style.product}>
@@ -70,6 +137,7 @@ export function ProductPage() {
               type="text"
               placeholder="$2999"
               className={style.textInput}
+              {...register("Price")}
             />
           </div>
         </div>
@@ -83,6 +151,7 @@ export function ProductPage() {
               type="text"
               placeholder="12"
               className={style.textInput}
+              {...register("Item_Weight")}
             />
           </div>
           <div className={style.product}>
@@ -93,6 +162,7 @@ export function ProductPage() {
               type="text"
               placeholder="105"
               className={style.textInput}
+              {...register("Lenght")}
             />
           </div>
           <div className={style.product}>
@@ -103,6 +173,7 @@ export function ProductPage() {
               type="text"
               placeholder="15"
               className={style.textInput}
+              {...register("Breadth")}
             />
           </div>
           <div className={style.product}>
@@ -113,6 +184,7 @@ export function ProductPage() {
               type="text"
               placeholder="23"
               className={style.textInput}
+              {...register("Width")}
             />
           </div>
         </div>
@@ -121,6 +193,7 @@ export function ProductPage() {
           <Label htmlFor="comment" value="Description" />
           <Textarea
             id="comment"
+            rows={6}
             placeholder="Standard glass,
             3.8GHz 8-core 10th-generation Intel Core i7 processor,
             Turbo Boost up to 5.0GHz,
@@ -131,6 +204,7 @@ export function ProductPage() {
             Magic Mouse 2,
             Magic Keyboard-Us"
             className={style.textArea}
+            {...register("Description")}
           />
         </div>
 
@@ -154,11 +228,33 @@ export function ProductPage() {
 
         <div className={style.image_conatiner}>
           <Label className={style.img_prd_name} value="Product Images" />
-          <div className={style.product_Images}></div>
+          <div className={style.product_Images}>
+            {fileList
+              ? fileList.map((item: any, index: number) => {
+                  return (
+                    <div key={index} className={style.arr_index_img}>
+                      <img
+                        src={URL.createObjectURL(item)}
+                        className={style.index_1_arr}
+                        alt="mainimage"
+                      />
+                      <RiDeleteBin6Line
+                        onClick={() => remove(index)}
+                        className={style.img_trash}
+                      />
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
         </div>
 
         <div className={style.dropdown_container}>
-          <div className={style.dropdown}>
+          <div
+            className={style.dropdown}
+            onDrop={dropOnfile}
+            onDragOver={dragFiles}
+          >
             <Label htmlFor="dropzone-file" className={style.dropzone}>
               <div className={style.drop_style}>
                 <svg
@@ -188,6 +284,7 @@ export function ProductPage() {
                 id="dropzone-file"
                 accept="image/*"
                 className="hidden"
+                onChange={fileOnDrop}
               />
             </Label>
           </div>
@@ -202,7 +299,7 @@ export function ProductPage() {
             Delete
           </Button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
