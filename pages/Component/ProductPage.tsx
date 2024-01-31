@@ -212,15 +212,15 @@ export function ProductPage() {
           <Label value="Selling Type" />
           <div className={style.checkBox} id="checkbox">
             <div className={style.checkButton}>
-              <Checkbox id="Store" defaultChecked />
+              <Checkbox id="Store" defaultChecked className={style.ck_btn} />
               <Label htmlFor="Store">In-store only</Label>
             </div>
             <div className={style.checkButton}>
-              <Checkbox id="Online" />
+              <Checkbox id="Online" className={style.ck_btn} />
               <Label htmlFor="Online">Online selling only</Label>
             </div>
             <div className={style.checkButton}>
-              <Checkbox id="Both" />
+              <Checkbox id="Both" className={style.ck_btn} />
               <Label htmlFor="Both">Both in-store and online</Label>
             </div>
           </div>
@@ -294,9 +294,8 @@ export function ProductPage() {
             Update Product
           </Button>
           <Button className={style.del_btn}>
-            <RiDeleteBin6Line />
-            <span />
-            Delete
+            <RiDeleteBin6Line className={style.del_icon} />
+            <span className={style.del_name}>Delete</span>
           </Button>
         </div>
       </form>

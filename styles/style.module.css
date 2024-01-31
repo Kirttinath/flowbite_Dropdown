@@ -177,7 +177,7 @@
   align-items: flex-start;
   gap: 8px;
   display: inline-flex;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
 }
 
@@ -192,7 +192,9 @@
   align-items: center;
   gap: 7px;
 }
-
+.ck_btn {
+  border-radius: 10px;
+}
 .image_conatiner {
   display: flex;
   padding: var(--0, 0px);
@@ -206,7 +208,7 @@
 .img_prd_name {
   align-self: stretch;
   color: var(--gray-900, #111928);
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
@@ -284,8 +286,6 @@
   color: #6b7280;
 }
 .submit_btn {
-  flex-wrap: wrap;
-  gap: 0.5rem;
   display: flex;
   padding: var(--0, 0px);
   align-items: center;
@@ -294,25 +294,35 @@
 }
 .sub_btn {
   display: flex;
-  padding: var(--25, 10px) var(--5, 20px);
+  padding: var(--25, 6px) var(--5, 14px);
   justify-content: center;
   align-items: center;
-  gap: var(--2, 8px);
-  border-radius: var(--rounded-lg, 8px);
+  gap: var(--2, 6px);
+  border-radius: var(--rounded-lg, 6px);
   background: var(--primary-700, #1a56db);
   color: rgba(255, 255, 255, 1);
 }
 .del_btn {
   display: flex;
-  padding: var(--25, 10px) var(--5, 20px);
+  padding: var(--25, 6px) var(--5, 14px);
   justify-content: center;
   align-items: center;
-  gap: var(--2, 8px);
-  border-radius: var(--rounded-lg, 8px);
+  gap: var(--2, 6px);
+  border-radius: var(--rounded-lg, 6px);
   background: var(--red-700, #c81e1e);
   color: rgba(255, 255, 255, 1);
 }
-
+.del_icon {
+  width: var(--35, 14px);
+  height: var(--35, 14px);
+}
+.del_name {
+  color: var(--white, #fff);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+}
 .arr_index_img {
   display: flex;
   width: 144px;
@@ -332,10 +342,13 @@
   flex-shrink: 0;
 }
 .img_trash {
-  width: var(--5, 20px);
-  height: var(--5, 20px);
+  width: var(--5, 25px);
+  height: var(--5, 25px);
   position: relative;
   left: -53px;
   bottom: 6.5px;
   cursor: pointer;
+  border-radius: var(--rounded-lg, 8px);
+  background: var(--red-700, #fefbfb);
+  color: rgb(232, 0, 0);
 }
