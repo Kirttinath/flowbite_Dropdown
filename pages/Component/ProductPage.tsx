@@ -29,6 +29,7 @@ type Validation = {
   Width: number;
   Description: string;
   CheckBoxVal: Array<string>;
+  FileCheck?: any;
 };
 
 export function ProductPage() {
@@ -55,6 +56,14 @@ export function ProductPage() {
     e.preventDefault();
   };
 
+  const MAX_FILE_SIZE = 5000000;
+  const ACCEPTED_IMAGE_TYPES = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+  ];
+
   const ValidationSchema: ZodType<Validation> = z.object({
     Product_Name: z.string().min(1, { message: "Product name required" }),
     Brand: z.string().min(1, { message: "Brand name required" }),
@@ -75,13 +84,24 @@ export function ProductPage() {
       .min(5, { message: "Minimum 5cm width required" }),
     Description: z
       .string()
-      .min(10, { message: "Description is required min 10" }),
+      .min(15, { message: "Description is required min 15 characters" }),
     CheckBoxVal: z
       .array(z.string(), {
         invalid_type_error: "Please select at least one checkbox.",
       })
       .refine((data) => data.length > 0, {
         message: "Please select at least one checkbox.",
+      }),
+    FileCheck: z
+      .any({
+        invalid_type_error: "Please select at least one Image.",
+      })
+      .refine((files) => files?.length <= 1, { message: "Image is required." })
+      .refine((files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type), {
+        message: ".jpg, .jpeg, .png and .webp files are accepted.",
+      })
+      .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, {
+        message: `Max file size is 5MB.`,
       }),
   });
 
@@ -302,7 +322,7 @@ export function ProductPage() {
             helperText={
               <>
                 {errors.Description && (
-                  <span className="flex text-red-500">
+                  <span className="flex text-red-600">
                     {errors.Description.message}
                   </span>
                 )}
@@ -367,6 +387,11 @@ export function ProductPage() {
                 })
               : ""}
           </div>
+          {errors.FileCheck && (
+            <span className="flex text-red-600">
+              {errors.FileCheck.message}
+            </span>
+          )}
         </div>
 
         <div className={style.dropdown_container}>
