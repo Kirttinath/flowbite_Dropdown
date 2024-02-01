@@ -104,6 +104,13 @@ export function ProductPage() {
               placeholder="Apple iMac 27”"
               className={style.textInput}
               {...register("Product_Name")}
+              helperText={
+                <>
+                  <span className="flex text-red-600">
+                    Product Name required!
+                  </span>
+                </>
+              }
             />
           </div>
           <div className={style.select}>
@@ -131,6 +138,13 @@ export function ProductPage() {
               placeholder="Apple"
               className={style.textInput}
               {...register("Brand")}
+              helperText={
+                <>
+                  <span className="flex text-red-600">
+                    Brand Name required!
+                  </span>
+                </>
+              }
             />
           </div>
           <div className={style.product}>
@@ -143,6 +157,11 @@ export function ProductPage() {
               placeholder="$2999"
               className={style.textInput}
               {...register("Price")}
+              helperText={
+                <>
+                  <span className="flex text-red-600">Price required!</span>
+                </>
+              }
             />
           </div>
         </div>
@@ -158,6 +177,13 @@ export function ProductPage() {
               placeholder="12"
               className={style.textInput}
               {...register("Item_Weight")}
+              helperText={
+                <>
+                  <span className="flex text-red-600">
+                    Item weight required!
+                  </span>
+                </>
+              }
             />
           </div>
           <div className={style.product}>
@@ -170,6 +196,13 @@ export function ProductPage() {
               placeholder="105"
               className={style.textInput}
               {...register("Lenght")}
+              helperText={
+                <>
+                  <span className="flex text-red-600">
+                    Item Length required!
+                  </span>
+                </>
+              }
             />
           </div>
           <div className={style.product}>
@@ -182,6 +215,13 @@ export function ProductPage() {
               placeholder="15"
               className={style.textInput}
               {...register("Breadth")}
+              helperText={
+                <>
+                  <span className="flex text-red-600">
+                    Item Breadth required!
+                  </span>
+                </>
+              }
             />
           </div>
           <div className={style.product}>
@@ -194,6 +234,13 @@ export function ProductPage() {
               placeholder="23"
               className={style.textInput}
               {...register("Width")}
+              helperText={
+                <>
+                  <span className="flex text-red-600">
+                    Item Width required!
+                  </span>
+                </>
+              }
             />
           </div>
         </div>
@@ -214,6 +261,13 @@ export function ProductPage() {
             // Magic Keyboard-Us"
             className={style.textArea}
             {...register("Description")}
+            helperText={
+              <>
+                <span className="flex text-red-600">
+                  Description required!(min 10 characters)
+                </span>
+              </>
+            }
           />
         </div>
 
@@ -221,7 +275,7 @@ export function ProductPage() {
           <Label value="Selling Type" />
           <div className={style.checkBox} id="checkbox">
             <div className={style.checkButton}>
-              <Checkbox id="Store" defaultChecked className={style.ck_btn} />
+              <Checkbox id="Store" className={style.ck_btn} />
               <Label htmlFor="Store">In-store only</Label>
             </div>
             <div className={style.checkButton}>
