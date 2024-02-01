@@ -67,11 +67,7 @@ export function ProductPage() {
       .min(10, { message: "Description is required min 10" }),
   });
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<Validation>({
+  const { register, handleSubmit } = useForm<Validation>({
     resolver: zodResolver(ValidationSchema),
   });
 
@@ -109,11 +105,6 @@ export function ProductPage() {
               className={style.textInput}
               {...register("Product_Name")}
             />
-            {errors.Product_Name && (
-              <span className="flex text-red-600">
-                {errors.Product_Name.message}
-              </span>
-            )}
           </div>
           <div className={style.select}>
             <div className={style.info}>
@@ -141,9 +132,6 @@ export function ProductPage() {
               className={style.textInput}
               {...register("Brand")}
             />
-            {errors.Brand && (
-              <span className="flex text-red-600">{errors.Brand.message}</span>
-            )}
           </div>
           <div className={style.product}>
             <div>
@@ -156,9 +144,6 @@ export function ProductPage() {
               className={style.textInput}
               {...register("Price")}
             />
-            {errors.Price && (
-              <span className="flex text-red-600">{errors.Price.message}</span>
-            )}
           </div>
         </div>
 
@@ -174,11 +159,6 @@ export function ProductPage() {
               className={style.textInput}
               {...register("Item_Weight")}
             />
-            {errors.Item_Weight && (
-              <span className="flex text-red-600">
-                {errors.Item_Weight.message}
-              </span>
-            )}
           </div>
           <div className={style.product}>
             <div>
@@ -191,9 +171,6 @@ export function ProductPage() {
               className={style.textInput}
               {...register("Lenght")}
             />
-            {errors.Lenght && (
-              <span className="flex text-red-600">{errors.Lenght.message}</span>
-            )}
           </div>
           <div className={style.product}>
             <div>
@@ -206,11 +183,6 @@ export function ProductPage() {
               className={style.textInput}
               {...register("Breadth")}
             />
-            {errors.Breadth && (
-              <span className="flex text-red-600">
-                {errors.Breadth.message}
-              </span>
-            )}
           </div>
           <div className={style.product}>
             <div>
@@ -223,9 +195,6 @@ export function ProductPage() {
               className={style.textInput}
               {...register("Width")}
             />
-            {errors.Width && (
-              <span className="flex text-red-600">{errors.Width.message}</span>
-            )}
           </div>
         </div>
 
@@ -246,11 +215,6 @@ export function ProductPage() {
             className={style.textArea}
             {...register("Description")}
           />
-          {errors.Description && (
-            <span className="flex text-red-600">
-              {errors.Description.message}
-            </span>
-          )}
         </div>
 
         <div className={style.selling_info}>
