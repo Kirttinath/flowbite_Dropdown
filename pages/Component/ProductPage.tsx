@@ -28,6 +28,7 @@ type Validation = {
   Breadth: number;
   Width: number;
   Description: string;
+  CheckBoxVal: Array<string>;
 };
 
 export function ProductPage() {
@@ -57,17 +58,38 @@ export function ProductPage() {
   const ValidationSchema: ZodType<Validation> = z.object({
     Product_Name: z.string().min(1, { message: "Product name required" }),
     Brand: z.string().min(1, { message: "Brand name required" }),
-    Price: z.number().min(1, { message: "Price required" }),
-    Item_Weight: z.number().min(1, { message: "weight required" }),
-    Lenght: z.number().min(1, { message: "Length required" }),
-    Breadth: z.number().min(1, { message: "Breadth required" }),
-    Width: z.number().min(1, { message: "Width required" }),
+    Price: z
+      .number({ invalid_type_error: "Price required" })
+      .min(100, { message: "Minimum Price is ₹100" }),
+    Item_Weight: z
+      .number({ invalid_type_error: "Item weight required" })
+      .min(5, { message: "Minimum 5kg weight required" }),
+    Lenght: z
+      .number({ invalid_type_error: "Item length required" })
+      .min(30, { message: "Minimum 30cm length required" }),
+    Breadth: z
+      .number({ invalid_type_error: "Item Breadth required" })
+      .min(20, { message: "Minimum 20cm breadth required" }),
+    Width: z
+      .number({ invalid_type_error: "Item width required" })
+      .min(5, { message: "Minimum 5cm width required" }),
     Description: z
       .string()
       .min(10, { message: "Description is required min 10" }),
+    CheckBoxVal: z
+      .array(z.string(), {
+        invalid_type_error: "Please select at least one checkbox.",
+      })
+      .refine((data) => data.length > 0, {
+        message: "Please select at least one checkbox.",
+      }),
   });
 
-  const { register, handleSubmit } = useForm<Validation>({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<Validation>({
     resolver: zodResolver(ValidationSchema),
   });
 
@@ -106,9 +128,11 @@ export function ProductPage() {
               {...register("Product_Name")}
               helperText={
                 <>
-                  <span className="flex text-red-600">
-                    Product Name required!
-                  </span>
+                  {errors.Product_Name && (
+                    <span className="flex text-red-600">
+                      {errors.Product_Name.message}
+                    </span>
+                  )}
                 </>
               }
             />
@@ -140,9 +164,11 @@ export function ProductPage() {
               {...register("Brand")}
               helperText={
                 <>
-                  <span className="flex text-red-600">
-                    Brand Name required!
-                  </span>
+                  {errors.Brand && (
+                    <span className="flex text-red-600">
+                      {errors.Brand.message}
+                    </span>
+                  )}
                 </>
               }
             />
@@ -152,14 +178,18 @@ export function ProductPage() {
               <Label value="Price" />
             </div>
             <TextInput
-              type="text"
+              type="number"
               id="base"
               placeholder="$2999"
               className={style.textInput}
-              {...register("Price")}
+              {...register("Price", { valueAsNumber: true })}
               helperText={
                 <>
-                  <span className="flex text-red-600">Price required!</span>
+                  {errors.Price && (
+                    <span className="flex text-red-600">
+                      {errors.Price.message}
+                    </span>
+                  )}
                 </>
               }
             />
@@ -172,16 +202,18 @@ export function ProductPage() {
               <Label value="Item Weight(kg)" />
             </div>
             <TextInput
-              type="text"
+              type="number"
               id="base"
               placeholder="12"
               className={style.textInput}
-              {...register("Item_Weight")}
+              {...register("Item_Weight", { valueAsNumber: true })}
               helperText={
                 <>
-                  <span className="flex text-red-600">
-                    Item weight required!
-                  </span>
+                  {errors.Item_Weight && (
+                    <span className="flex text-red-600">
+                      {errors.Item_Weight.message}
+                    </span>
+                  )}
                 </>
               }
             />
@@ -191,16 +223,18 @@ export function ProductPage() {
               <Label value="Length(cm)" />
             </div>
             <TextInput
-              type="text"
+              type="number"
               id="base"
               placeholder="105"
               className={style.textInput}
-              {...register("Lenght")}
+              {...register("Lenght", { valueAsNumber: true })}
               helperText={
                 <>
-                  <span className="flex text-red-600">
-                    Item Length required!
-                  </span>
+                  {errors.Lenght && (
+                    <span className="flex text-red-600">
+                      {errors.Lenght.message}
+                    </span>
+                  )}
                 </>
               }
             />
@@ -210,16 +244,18 @@ export function ProductPage() {
               <Label value="Breadth(cm)" />
             </div>
             <TextInput
-              type="text"
+              type="number"
               id="base"
               placeholder="15"
               className={style.textInput}
-              {...register("Breadth")}
+              {...register("Breadth", { valueAsNumber: true })}
               helperText={
                 <>
-                  <span className="flex text-red-600">
-                    Item Breadth required!
-                  </span>
+                  {errors.Breadth && (
+                    <span className="flex text-red-600">
+                      {errors.Breadth.message}
+                    </span>
+                  )}
                 </>
               }
             />
@@ -229,16 +265,18 @@ export function ProductPage() {
               <Label value="Width(cm)" />
             </div>
             <TextInput
-              type="text"
+              type="number"
               id="base"
               placeholder="23"
               className={style.textInput}
-              {...register("Width")}
+              {...register("Width", { valueAsNumber: true })}
               helperText={
                 <>
-                  <span className="flex text-red-600">
-                    Item Width required!
-                  </span>
+                  {errors.Width && (
+                    <span className="flex text-red-600">
+                      {errors.Width.message}
+                    </span>
+                  )}
                 </>
               }
             />
@@ -263,9 +301,11 @@ export function ProductPage() {
             {...register("Description")}
             helperText={
               <>
-                <span className="flex text-red-600">
-                  Description required!(min 10 characters)
-                </span>
+                {errors.Description && (
+                  <span className="flex text-red-500">
+                    {errors.Description.message}
+                  </span>
+                )}
               </>
             }
           />
@@ -275,18 +315,35 @@ export function ProductPage() {
           <Label value="Selling Type" />
           <div className={style.checkBox} id="checkbox">
             <div className={style.checkButton}>
-              <Checkbox id="Store" className={style.ck_btn} />
+              <Checkbox
+                id="Store"
+                className={style.ck_btn}
+                {...register("CheckBoxVal")}
+              />
               <Label htmlFor="Store">In-store only</Label>
             </div>
             <div className={style.checkButton}>
-              <Checkbox id="Online" className={style.ck_btn} />
+              <Checkbox
+                id="Online"
+                className={style.ck_btn}
+                {...register("CheckBoxVal")}
+              />
               <Label htmlFor="Online">Online selling only</Label>
             </div>
             <div className={style.checkButton}>
-              <Checkbox id="Both" className={style.ck_btn} />
+              <Checkbox
+                id="Both"
+                className={style.ck_btn}
+                {...register("CheckBoxVal")}
+              />
               <Label htmlFor="Both">Both in-store and online</Label>
             </div>
           </div>
+          {errors.CheckBoxVal && (
+            <span className="flex text-red-600">
+              {errors.CheckBoxVal.message}
+            </span>
+          )}
         </div>
 
         <div className={style.image_conatiner}>
