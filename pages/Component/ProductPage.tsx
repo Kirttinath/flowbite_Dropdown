@@ -29,7 +29,7 @@ type Validation = {
   Width: number;
   Description: string;
   CheckBoxVal: Array<string>;
-  FileCheck?: any;
+  FileImage: FileList;
 };
 
 export function ProductPage() {
@@ -38,31 +38,32 @@ export function ProductPage() {
     e.preventDefault();
     const newfile = e.target.files[0];
     if (newfile) {
-      const UpadateList: any = [...fileList, newfile];
-      setFileList(UpadateList);
-      console.log(UpadateList);
+      const UpdateList: any = [...fileList, newfile];
+      setFileList(UpdateList);
+      setValue("FileImage", UpdateList);
+      console.log(UpdateList);
     }
   };
   const dropOnfile = (e: any) => {
     e.preventDefault();
     const newfile = e.dataTransfer.files[0];
     if (newfile) {
-      const UpadateList: any = [...fileList, newfile];
-      setFileList(UpadateList);
-      console.log(UpadateList);
+      const UpdateList: any = [...fileList, newfile];
+      setFileList(UpdateList);
+      setValue("FileImage", UpdateList);
+      console.log(UpdateList);
     }
   };
   const dragFiles = (e: any) => {
     e.preventDefault();
+    const newfile = e.dataTransfer.files[0];
+    if (newfile) {
+      const UpdateList: any = [...fileList, newfile];
+      setFileList(UpdateList);
+      setValue("FileImage", UpdateList);
+      console.log(UpdateList);
+    }
   };
-
-  const MAX_FILE_SIZE = 5000000;
-  const ACCEPTED_IMAGE_TYPES = [
-    "image/jpeg",
-    "image/jpg",
-    "image/png",
-    "image/webp",
-  ];
 
   const ValidationSchema: ZodType<Validation> = z.object({
     Product_Name: z.string().min(1, { message: "Product name required" }),
@@ -92,35 +93,31 @@ export function ProductPage() {
       .refine((data) => data.length > 0, {
         message: "Please select at least one checkbox.",
       }),
-    FileCheck: z
-      .any({
-        invalid_type_error: "Please select at least one Image.",
-      })
-      .refine((files) => files?.length <= 1, { message: "Image is required." })
-      .refine((files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type), {
-        message: ".jpg, .jpeg, .png and .webp files are accepted.",
-      })
-      .refine((files) => files?.[0]?.size <= MAX_FILE_SIZE, {
-        message: `Max file size is 5MB.`,
+    FileImage: z
+      .custom<FileList>()
+      .refine((FileList: any) => FileList.length > 0, {
+        message: "Image Required",
       }),
   });
 
   const {
     register,
     formState: { errors },
+    setValue,
     handleSubmit,
   } = useForm<Validation>({
     resolver: zodResolver(ValidationSchema),
   });
 
   const submitData = (data: Validation) => {
-    console.log("Working", data);
+    console.log("Submit Data working", data);
   };
   const remove = (index: number) => {
-    const upadtelist = fileList.filter((item, id: number) => {
+    const updatelist: any = fileList.filter((item, id: number) => {
       return index !== id;
     });
-    setFileList(upadtelist);
+    setFileList(updatelist);
+    setValue("FileImage", updatelist);
   };
 
   return (
@@ -387,11 +384,6 @@ export function ProductPage() {
                 })
               : ""}
           </div>
-          {errors.FileCheck && (
-            <span className="flex text-red-600">
-              {errors.FileCheck.message}
-            </span>
-          )}
         </div>
 
         <div className={style.dropdown_container}>
@@ -429,10 +421,14 @@ export function ProductPage() {
                 id="dropzone-file"
                 accept="image/*"
                 className="hidden"
+                {...register("FileImage")}
                 onChange={fileOnDrop}
               />
             </Label>
           </div>
+          {errors.FileImage && (
+            <span className="flex text-red-600">Image is required !</span>
+          )}
         </div>
         <div className={style.submit_btn}>
           <Button className={style.sub_btn} type="submit">
