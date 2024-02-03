@@ -36,11 +36,13 @@
   height: var(--3, 16px);
 }
 
-.formInput1 {
+.formInput {
   display: flex;
   flex-wrap: wrap;
   gap: var(--4, 10px);
   align-self: stretch;
+  justify-content: center;
+  margin-top: 20px;
 }
 .formInput {
   display: flex;

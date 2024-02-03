@@ -41,7 +41,7 @@ const AddProductPage = () => {
 
   return (
     <div className={Style.main}>
-      <div className={Style.formInput1}>
+      <div className={Style.formInput}>
         <Button
           color="blue"
           onClick={() =>
