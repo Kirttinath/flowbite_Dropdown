@@ -7,10 +7,10 @@ import { FcInfo } from "react-icons/fc";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Image from "next/image";
 
-type ProductValue = {
+type Product_Type = {
   Product: {
-    ProductName: string;
-    Select_lang: string;
+    Product_Name: string;
+    Select_Type: string;
     Brand: string;
     Price: number;
     Description: string;
@@ -25,15 +25,15 @@ const AddProductPage = () => {
     formState: { errors },
     resetField,
     reset,
-  } = useForm<ProductValue>();
+  } = useForm<Product_Type>();
   const { fields, append, remove } = useFieldArray({
     name: "Product",
     control,
   });
-  const onSubmit = (data: ProductValue) => console.log(data);
+  const onSubmit = (data: Product_Type) => console.log(data);
   // const reset1 = (index:number)=>{
-  //   resetField(Product.${index}.ProductName);
-  //   resetField(Product.${index}.Select_lang);
+  //   resetField(Product.${index}.Product_Name);
+  //   resetField(Product.${index}.Select_Type);
   //   resetField(Product.${index}.Brand);
   //   resetField(Product.${index}.Price);
   //   resetField(Product.${index}.Description);
@@ -46,8 +46,8 @@ const AddProductPage = () => {
           color="blue"
           onClick={() =>
             append({
-              ProductName: "",
-              Select_lang: "",
+              Product_Name: "",
+              Select_Type: "",
               Brand: "",
               Price: 0,
               Description: "",
@@ -63,13 +63,13 @@ const AddProductPage = () => {
             <div className={Style.formInput}>
               <div className={Style.formInputdiv}>
                 <div className={Style.inputtext}>
-                  <Label htmlFor="ProductName" value="ProductName" />
+                  <Label htmlFor="Product_Name" value="Product Name :" />
                 </div>
                 <TextInput
-                  id="ProductName"
-                  className={Style.input1}
+                  id="Product_Name"
+                  className={Style.input}
                   type="text"
-                  // {...register(Product.${index}.ProductName)}
+                  // {...register(Product.${index}.Product_Name)}
                   helperText={
                     <>
                       <span
@@ -86,13 +86,13 @@ const AddProductPage = () => {
               </div>
               <div className={Style.formInputdiv}>
                 <div className={Style.inputtext}>
-                  <Label htmlFor="SelectLanguage" value="Select Language" />
+                  <Label htmlFor="SelectLanguage" value="Select Type :" />
                   <FcInfo className={Style.imga} />
                 </div>
                 <Select
-                  className={Style.input1}
+                  className={Style.input}
                   id="SelectLanguage"
-                  // {...register(Product.${index}.Select_lang)}
+                  // {...register(Product.${index}.Select_Type)}
                   helperText={
                     <>
                       <span
@@ -106,11 +106,11 @@ const AddProductPage = () => {
                     </>
                   }
                 >
-                  <option></option>
-                  <option>English</option>
-                  <option>Hindi</option>
-                  <option>Odia</option>
-                  <option>Telugu</option>
+                  <option>Electronics</option>
+                  <option>Android</option>
+                  <option>iOS</option>
+                  <option>Laptop</option>
+                  <option>Others</option>
                 </Select>
               </div>
             </div>
@@ -121,7 +121,7 @@ const AddProductPage = () => {
                 </div>
                 <TextInput
                   id="Brand"
-                  className={Style.input1}
+                  className={Style.input}
                   type="text"
                   // {...register(Product.${index}.Brand)}
                   helperText={
@@ -145,7 +145,7 @@ const AddProductPage = () => {
                 <TextInput
                   id="Price"
                   type="number"
-                  className={Style.input1}
+                  className={Style.input}
                   // {...register(Product.${index}.Price)}
                   helperText={
                     <>
@@ -168,10 +168,10 @@ const AddProductPage = () => {
               </div>
               <Textarea
                 id="comment"
-                placeholder="Leave a comment..."
-                rows={4}
+                placeholder="Description about the Product ...."
+                rows={5}
                 // {...register(Product.${index}.Description)}
-                className={Style.desinp}
+                className={Style.description_input}
                 helperText={
                   <>
                     <span
@@ -191,16 +191,16 @@ const AddProductPage = () => {
                 Delete
                 <RiDeleteBin6Line className={Style.delete} />
               </Button>
-              <Button color="warning">
-                {/* onClick={() => reset1(index)} */}
+              {/* <Button color="warning">
+                onClick={() => reset1(index)}
                 Reset
-              </Button>
+              </Button> */}
               <Button
                 color="blue"
                 onClick={() =>
                   append({
-                    ProductName: "",
-                    Select_lang: "",
+                    Product_Name: "",
+                    Select_Type: "",
                     Brand: "",
                     Price: 0,
                     Description: "",
@@ -212,7 +212,7 @@ const AddProductPage = () => {
             </div>
           </div>
         ))}
-        <Button type="submit">Submit</Button>
+        {/* <Button type="submit">Submit</Button> */}
       </form>
     </div>
   );
