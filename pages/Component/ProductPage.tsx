@@ -426,10 +426,10 @@ export function ProductPage() {
               />
             </Label>
           </div>
-          {errors.FileImage && (
-            <span className="flex text-red-600">Image is required !</span>
-          )}
         </div>
+        {errors.FileImage && (
+          <span className="flex text-red-600">Image is required !</span>
+        )}
         <div className={style.submit_btn}>
           <Button className={style.sub_btn} type="submit">
             Update Product
