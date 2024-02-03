@@ -87,7 +87,7 @@ const AddProductPage = () => {
               <div className={Style.formInputdiv}>
                 <div className={Style.inputtext}>
                   <Label htmlFor="SelectLanguage" value="Select Language" />
-                  {/* <Image src={Info} alt="vb" className={Style.imga} /> */}
+                  <FcInfo className={Style.imga} />
                 </div>
                 <Select
                   className={Style.input1}
@@ -188,7 +188,8 @@ const AddProductPage = () => {
             </div>
             <div className={Style.buttondiv}>
               <Button color="failure" onClick={() => remove(index)}>
-                {/* <Image className={Style.delete} src={Delete} alt="" /> Delete */}
+                Delete
+                <RiDeleteBin6Line className={Style.delete} />
               </Button>
               <Button color="warning">
                 {/* onClick={() => reset1(index)} */}
