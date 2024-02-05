@@ -56,6 +56,9 @@ const AddProductPage = () => {
         >
           Add Product
         </Button>
+        <Button color="warning" className={Style.resetbtn}>
+          Reset All
+        </Button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field, index) => (
@@ -191,10 +194,10 @@ const AddProductPage = () => {
                 Delete
                 <RiDeleteBin6Line className={Style.delete} />
               </Button>
-              {/* <Button color="warning">
-                onClick={() => reset1(index)}
+              <Button color="warning">
+                {/* onClick={() => reset1(index)} */}
                 Reset
-              </Button> */}
+              </Button>
               <Button
                 color="blue"
                 onClick={() =>

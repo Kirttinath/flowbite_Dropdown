@@ -44,13 +44,17 @@
   justify-content: center;
   margin-top: 20px;
 }
-.formInput {
+.resetbtn {
+  margin-left: 250px;
+  background-color: rgb(255, 64, 30);
+}
+/* .formInput {
   display: flex;
   flex-wrap: wrap;
   gap: var(--4, 10px);
   align-self: stretch;
   flex: 1 1 0;
-}
+} */
 .formInputdiv {
   display: flex;
   flex-direction: column;
@@ -110,6 +114,8 @@
   align-items: center;
   gap: var(--4, 12px);
   align-self: stretch;
+  margin-left: 150px;
+  gap: 80px;
 }
 @media only screen and (max-width: 768px) {
   .formInput {
