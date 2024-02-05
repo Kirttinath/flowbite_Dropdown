@@ -1,11 +1,9 @@
 "use client";
 import Style from "@/styles/AddProductPage.module.css";
 import { useFieldArray, useForm } from "react-hook-form";
-import { UseFormResetField } from "react-hook-form";
 import { Button, Label, TextInput, Select, Textarea } from "flowbite-react";
 import { FcInfo } from "react-icons/fc";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { number, string, z, ZodType } from "zod";
 
@@ -22,23 +20,23 @@ type Product_Type = {
 const valid_form: ZodType<Product_Type> = z.object({
   Product: z.array(
     z.object({
-      Product_Name: string().min(1, { message: "productname is required" }),
-      Select_Type: string().min(1, { message: "select language is required" }),
-      Brand: string().min(1, { message: "brand is required" }),
-      Price: number({ invalid_type_error: "Price Required" }).min(1, {
-        message: "price is required",
+      Product_Name: string().min(1, { message: "product Name is required" }),
+      Select_Type: string().min(1, { message: "Select Type is required" }),
+      Brand: string().min(1, { message: "Brand is required" }),
+      Price: number({ invalid_type_error: "Price Required" }).min(100, {
+        message: "Min 100₹ price is required",
       }),
-      Description: string().min(10, { message: "min 10 character required" }),
+      Description: string().min(15, { message: "Min 15 character required" }),
     })
   ),
 });
 
 export default function AddProductPage() {
   const {
+    handleSubmit,
     register,
     resetField,
     formState: { errors },
-    handleSubmit,
     reset,
     control,
   } = useForm({ resolver: zodResolver(valid_form) });
@@ -46,14 +44,14 @@ export default function AddProductPage() {
     name: "Product",
     control,
   });
-  const onsubmit = (data: Product_Type) => console.log(data);
   const resetData = (index: number) => {
-    resetField(Product.$(index).Product_Name);
+    // resetField(Product.$(index).Product_Name);
     // resetField(Product.${index}.Select_Type);
     // resetField(Product.${index}.Brand);
     // resetField(Product.${index}.Price);
     // resetField(Product.${index}.Description);
   };
+  const onSubmit = (data: Product_Type) => console.log(data);
 
   return (
     <>
@@ -81,7 +79,7 @@ export default function AddProductPage() {
             Reset All
           </Button>
         </div>
-        <form onSubmit={handleSubmit(onsubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {fields.map((field, index) => (
             <div className={Style.form} key={field.id}>
               <div className={Style.formInput}>
