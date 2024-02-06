@@ -20,7 +20,7 @@ type Product_Type = {
 const valid_form: ZodType<Product_Type> = z.object({
   Product: z.array(
     z.object({
-      Product_Name: string().min(1, { message: "product Name is required" }),
+      Product_Name: string().min(1, { message: "Product Name is required" }),
       Select_Type: string().min(1, { message: "Select Type is required" }),
       Brand: string().min(1, { message: "Brand is required" }),
       Price: number({ invalid_type_error: "Price Required" }).min(100, {
