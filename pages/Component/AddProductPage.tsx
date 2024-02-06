@@ -39,19 +39,19 @@ export default function AddProductPage() {
     formState: { errors },
     reset,
     control,
-  } = useForm({ resolver: zodResolver(valid_form) });
+  } = useForm<Product_Type>({ resolver: zodResolver(valid_form) });
   const { fields, append, remove } = useFieldArray({
     name: "Product",
     control,
   });
   const resetData = (index: number) => {
-    // resetField(Product.$(index).Product_Name);
-    // resetField(Product.${index}.Select_Type);
-    // resetField(Product.${index}.Brand);
-    // resetField(Product.${index}.Price);
-    // resetField(Product.${index}.Description);
+    resetField(`Product.${index}.Product_Name`);
+    resetField(`Product.${index}.Select_Type`);
+    resetField(`Product.${index}.Brand`);
+    resetField(`Product.${index}.Price`);
+    resetField(`Product.${index}.Description`);
   };
-  const onSubmit = (data: Product_Type) => console.log(data);
+  const submit = (data: Product_Type) => console.log(data);
 
   return (
     <>
@@ -79,7 +79,7 @@ export default function AddProductPage() {
             Reset All
           </Button>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(submit)}>
           {fields.map((field, index) => (
             <div className={Style.form} key={field.id}>
               <div className={Style.formInput}>
@@ -91,7 +91,7 @@ export default function AddProductPage() {
                     id="Product_Name"
                     className={Style.input}
                     type="text"
-                    // {...register(Product.${index}.Product_Name)}
+                    {...register(`Product.${index}.Product_Name`)}
                     helperText={
                       <>
                         <span
@@ -101,7 +101,9 @@ export default function AddProductPage() {
                             lineHeight: "1.25rem",
                             color: "#DC2626",
                           }}
-                        ></span>
+                        >
+                          {errors.Product?.[index]?.Product_Name?.message}
+                        </span>
                       </>
                     }
                   />
@@ -114,7 +116,7 @@ export default function AddProductPage() {
                   <Select
                     className={Style.input}
                     id="SelectLanguage"
-                    // {...register(Product.${index}.Select_Type)}
+                    {...register(`Product.${index}.Select_Type`)}
                     helperText={
                       <>
                         <span
@@ -124,11 +126,13 @@ export default function AddProductPage() {
                             lineHeight: "1.25rem",
                             color: "#DC2626",
                           }}
-                        ></span>
+                        >
+                          {errors.Product?.[index]?.Select_Type?.message}
+                        </span>
                       </>
                     }
                   >
-                    <option>Electronics</option>
+                    <option></option>
                     <option>Android</option>
                     <option>iOS</option>
                     <option>Laptop</option>
@@ -145,7 +149,7 @@ export default function AddProductPage() {
                     id="Brand"
                     className={Style.input}
                     type="text"
-                    // {...register(Product.${index}.Brand)}
+                    {...register(`Product.${index}.Brand`)}
                     helperText={
                       <>
                         <span
@@ -155,7 +159,9 @@ export default function AddProductPage() {
                             lineHeight: "1.25rem",
                             color: "#DC2626",
                           }}
-                        ></span>
+                        >
+                          {errors.Product?.[index]?.Brand?.message}
+                        </span>
                       </>
                     }
                   />
@@ -168,7 +174,9 @@ export default function AddProductPage() {
                     id="Price"
                     type="number"
                     className={Style.input}
-                    // {...register(Product.${index}.Price)}
+                    {...register(`Product.${index}.Price`, {
+                      valueAsNumber: true,
+                    })}
                     helperText={
                       <>
                         <span
@@ -178,7 +186,9 @@ export default function AddProductPage() {
                             lineHeight: "1.25rem",
                             color: "#DC2626",
                           }}
-                        ></span>
+                        >
+                          {errors.Product?.[index]?.Price?.message}
+                        </span>
                       </>
                     }
                   />
@@ -192,7 +202,7 @@ export default function AddProductPage() {
                   id="comment"
                   placeholder="Description about the Product ...."
                   rows={5}
-                  // {...register(Product.${index}.Description)}
+                  {...register(`Product.${index}.Description`)}
                   className={Style.description_input}
                   helperText={
                     <>
@@ -203,7 +213,9 @@ export default function AddProductPage() {
                           lineHeight: "1.25rem",
                           color: "#DC2626",
                         }}
-                      ></span>
+                      >
+                        {errors.Product?.[index]?.Description?.message}
+                      </span>
                     </>
                   }
                 />
@@ -213,9 +225,9 @@ export default function AddProductPage() {
                   Delete
                   <RiDeleteBin6Line className={Style.delete} />
                 </Button>
-                {/* <Button color="warning" onClick={() => resetData(index)}>
-            Reset
-          </Button> */}
+                <Button color="warning" onClick={() => resetData(index)}>
+                  Reset
+                </Button>
                 <Button
                   color="blue"
                   onClick={() =>
