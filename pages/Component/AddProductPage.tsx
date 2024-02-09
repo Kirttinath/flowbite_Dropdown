@@ -26,7 +26,10 @@ const valid_form: ZodType<Product_Type> = z.object({
       Price: number({ invalid_type_error: "Price Required" }).min(100, {
         message: "Min 100₹ price is required",
       }),
-      Description: string().min(15, { message: "Min 15 character required" }),
+      Description: string({ invalid_type_error: "Description required" }).min(
+        15,
+        { message: "Min 15 character required" }
+      ),
     })
   ),
 });
@@ -95,6 +98,7 @@ export default function AddProductPage() {
                     helperText={
                       <>
                         <span
+                          data-testid="product_err"
                           style={{
                             marginTop: "0.5rem",
                             fontSize: "0.875rem",
@@ -120,6 +124,7 @@ export default function AddProductPage() {
                     helperText={
                       <>
                         <span
+                          data-testid="Type_err"
                           style={{
                             marginTop: "0.5rem",
                             fontSize: "0.875rem",
@@ -153,6 +158,7 @@ export default function AddProductPage() {
                     helperText={
                       <>
                         <span
+                          data-testid="Brand_err"
                           style={{
                             marginTop: "0.5rem",
                             fontSize: "0.875rem",
@@ -180,6 +186,7 @@ export default function AddProductPage() {
                     helperText={
                       <>
                         <span
+                          data-testid="Price_err"
                           style={{
                             marginTop: "0.5rem",
                             fontSize: "0.875rem",
@@ -207,6 +214,7 @@ export default function AddProductPage() {
                   helperText={
                     <>
                       <span
+                        data-testid="Desc_err"
                         style={{
                           marginTop: "0.5rem",
                           fontSize: "0.875rem",
