@@ -1,5 +1,5 @@
 import AddProductPage from "../AddProductPage";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 describe("AddProductPage Test", () => {
   test("Rendering Test", () => {
@@ -122,5 +122,33 @@ describe("Delete Button functionality", () => {
     expect(screen.queryByLabelText("Brand")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Price")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Description")).not.toBeInTheDocument();
+  });
+});
+describe("Reset Button functionality", () => {
+  test("after click add then click all the fields are empty Test", () => {
+    render(<AddProductPage />);
+    const button1 = screen.getByText("Add Product");
+    fireEvent.click(button1);
+
+    const productInput = screen.getByLabelText("Product Name :");
+    const selectTypeInput = screen.getByLabelText("Select Type :");
+    const brandInput = screen.getByLabelText("Brand");
+    const priceInput = screen.getByLabelText("Price");
+    const descriptionInput = screen.getByLabelText("Description");
+    fireEvent.change(productInput, { target: { value: "Test Product" } });
+    fireEvent.change(selectTypeInput, { target: { value: "Android" } });
+    fireEvent.change(brandInput, { target: { value: "Test Brand" } });
+    fireEvent.change(priceInput, { target: { value: "200" } });
+    fireEvent.change(descriptionInput, {
+      target: { value: "Test Description" },
+    });
+    const button2 = screen.getByText("Reset");
+    fireEvent.click(button2);
+
+    expect(productInput.value).toBe("");
+    expect(selectTypeInput.value).toBe("");
+    expect(brandInput.value).toBe("");
+    // expect(priceInput.value).toBe("0");
+    expect(descriptionInput.value).toBe("");
   });
 });
