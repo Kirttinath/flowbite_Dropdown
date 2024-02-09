@@ -76,7 +76,26 @@ describe("AddProductPage Test", () => {
     expect(screen.queryByLabelText("Description")).not.toBeInTheDocument();
   });
 });
-
+describe("Select Type Options Test", () => {
+  test("Select Type in the document or not Test", () => {
+    render(<AddProductPage />);
+    const button1 = screen.getByText("Add Product");
+    fireEvent.click(button1);
+    expect(screen.getByLabelText("Select Type :")).toBeInTheDocument();
+  });
+  test("Select Type has options or not Test", () => {
+    render(<AddProductPage />);
+    const button1 = screen.getByText("Add Product");
+    fireEvent.click(button1);
+    const selecttype = screen.getByLabelText("Select Type :");
+    fireEvent.mouseDown(selecttype);
+    const options = screen.getAllByRole("option");
+    const itemsopt = ["", "Android", "iOS", "Laptop", "Others"];
+    for (let i = 0, j = 0; i < options.length; i++, j++) {
+      expect(options[i]).toHaveTextContent(itemsopt[j]);
+    }
+  });
+});
 describe("Submit Button functionality", () => {
   test("every field filled with some value", () => {
     render(<AddProductPage />);
