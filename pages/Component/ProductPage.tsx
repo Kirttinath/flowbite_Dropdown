@@ -32,7 +32,7 @@ type Validation = {
   FileImage: FileList;
 };
 
-export function ProductPage() {
+export default function ProductPage() {
   const [fileList, setFileList] = useState([]);
   const fileOnDrop = (e: any) => {
     e.preventDefault();
