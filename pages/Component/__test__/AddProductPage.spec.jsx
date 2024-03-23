@@ -1,5 +1,5 @@
 import AddProductPage from "../AddProductPage";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor,describe } from "@testing-library/react";
 
 describe("AddProductPage Test", () => {
   test("Rendering Test", () => {
