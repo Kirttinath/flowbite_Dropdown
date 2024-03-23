@@ -16,6 +16,8 @@ type Product_Type = {
     Description: string;
   }[];
 };
+//* Validating the Schema Type
+//* ------------------------------
 
 const valid_form: ZodType<Product_Type> = z.object({
   Product: z.array(
