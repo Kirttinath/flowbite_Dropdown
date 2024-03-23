@@ -65,6 +65,9 @@ export function ProductPage() {
     }
   };
 
+  //* Validating the Schema Type
+  //* ------------------------------
+
   const ValidationSchema: ZodType<Validation> = z.object({
     Product_Name: z.string().min(1, { message: "Product name required" }),
     Brand: z.string().min(1, { message: "Brand name required" }),
