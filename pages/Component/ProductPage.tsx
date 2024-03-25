@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodType, z } from "zod";
 
+//Type Validation
 type Validation = {
   Product_Name: string;
   Brand: string;
