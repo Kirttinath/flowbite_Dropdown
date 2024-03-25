@@ -19,7 +19,6 @@ jobs:
         with:
           node-version: 20.8.1
       - run: npm ci
-      - run: npm run build
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
